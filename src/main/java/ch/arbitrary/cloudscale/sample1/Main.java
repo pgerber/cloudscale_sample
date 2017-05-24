@@ -39,8 +39,9 @@ public class Main {
         {
             System.out.println(String.format("creating object %s", objectKey));
             ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentLength(CONTENT.length());
-            ByteArrayInputStream stream = new ByteArrayInputStream(CONTENT.getBytes());
+            byte[] bytes = CONTENT.getBytes();
+            metadata.setContentLength(bytes.length);
+            ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
             PutObjectRequest request = new PutObjectRequest(BUCKET_NAME, objectKey, stream, metadata);
             s3client.putObject(request);
             System.out.println("ok");
